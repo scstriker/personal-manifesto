@@ -309,131 +309,133 @@ evaluate if they complement you.
               </p>
 
               <button onClick={() => { setAiMode('chat'); setResponse(''); }}
-                className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${aiMode ===
-                  'chat' ? 'bg-slate-800 border-indigo-500 shadow-lg shadow-indigo-500/10' : 'bg-slate-900
-                        border-white /5 hover:border-indigo-500/30'}`}
-                        >
-              <div className={`p-3 rounded-full ${aiMode === 'chat' ? 'bg-indigo-500 text-white'
-                : 'bg-slate-800 text-slate-400'}`}>
-                <MessageSquare size={20} />
-              </div>
-              <div className="text-left">
-                <div className="font-bold text-white">Oracle Mode</div>
-                <div className="text-xs text-slate-400">向“银魂式战略家”提问</div>
-              </div>
-            </button>
-
-            <button onClick={() => { setAiMode('match'); setResponse(''); }}
-              className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${aiMode ===
-                'match' ? 'bg-slate-800 border-emerald-500 shadow-lg shadow-emerald-500/10' : 'bg-slate-900
-                        border-white /5 hover:border-emerald-500/30'}`}
-                        >
-            <div className={`p-3 rounded-full ${aiMode === 'match' ? 'bg-emerald-500 text-white'
-              : 'bg-slate-800 text-slate-400'}`}>
-              <ShieldCheck size={20} />
-            </div>
-            <div className="text-left">
-              <div className="font-bold text-white">Synergy Check</div>
-              <div className="text-xs text-slate-400">测试你作为“整合者”的契合度</div>
-            </div>
-          </button>
-        </div>
-
-        {/* Right Panel: Interaction Area */}
-        <div
-          className="lg:col-span-2 bg-slate-900 rounded-2xl border border-white/10 flex flex-col min-h-[400px]">
-
-          {/* Output Display */}
-          <div className="flex-grow p-6 space-y-4 overflow-y-auto max-h-[500px]">
-            {response ? (
-              <div ref={responseRef} className="animate-fade-in">
-                <div className="flex gap-4">
-                  <div
-                    className="min-w-[40px] h-10 bg-indigo-950 rounded-full flex items-center justify-center border border-indigo-500/30">
-                    <Brain size={18} className="text-indigo-400" />
-                  </div>
-                  <div
-                    className="bg-slate-800/50 p-5 rounded-2xl rounded-tl-none border border-white/5 text-slate-200 leading-relaxed whitespace-pre-wrap shadow-inner">
-                    <span
-                      className="text-indigo-400 font-bold block mb-2 text-xs uppercase tracking-wider">
-                      {aiMode === 'chat' ? 'Strategist Response' : 'Compatibility Report'}
-                    </span>
-                    {response}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-slate-500 opacity-50">
-                <Sparkles size={48} className="mb-4 text-indigo-500" />
-                <p className="text-sm">
-                  {aiMode === 'chat'
-                    ? 'Waiting for your signal...'
-                    : 'Ready to analyze your profile...'}
-                </p>
-              </div>
-            )}
-          </div>
-
-          {/* Input Area */}
-          <div className="p-4 border-t border-white/10 bg-slate-950/50 rounded-b-2xl">
-            <div className="relative">
-              <textarea value={input} onChange={(e) => setInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleAiQuery();
-                  }
-                }}
-                placeholder={
-                  aiMode === 'chat'
-                    ? "Ask me anything (Life, Business, Universe)..."
-                    : "Describe your skills, work style, and personality..."
-                }
-                className="w-full bg-slate-900 text-white placeholder-slate-500 border border-white/10 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none h-14 min-h-[56px] overflow-hidden"
-              />
-              <button
-                onClick={handleAiQuery}
-                disabled={isLoading || !input.trim()}
-                className="absolute right-2 top-2 p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${aiMode === 'chat'
+                    ? 'bg-slate-800 border-indigo-500 shadow-lg shadow-indigo-500/10'
+                    : 'bg-slate-900 border-white/5 hover:border-indigo-500/30'
+                  }`}
               >
-                {isLoading ? <Loader size={18} className="animate-spin" /> : <Send size={18} />}
+                <div className={`p-3 rounded-full ${aiMode === 'chat' ? 'bg-indigo-500 text-white'
+                  : 'bg-slate-800 text-slate-400'}`}>
+                  <MessageSquare size={20} />
+                </div>
+                <div className="text-left">
+                  <div className="font-bold text-white">Oracle Mode</div>
+                  <div className="text-xs text-slate-400">向“银魂式战略家”提问</div>
+                </div>
+              </button>
+
+              <button onClick={() => { setAiMode('match'); setResponse(''); }}
+                className={`w-full p-4 rounded-xl border flex items-center gap-4 transition-all ${aiMode === 'match'
+                    ? 'bg-slate-800 border-emerald-500 shadow-lg shadow-emerald-500/10'
+                    : 'bg-slate-900 border-white/5 hover:border-emerald-500/30'
+                  }`}
+              >
+                <div className={`p-3 rounded-full ${aiMode === 'match' ? 'bg-emerald-500 text-white'
+                  : 'bg-slate-800 text-slate-400'}`}>
+                  <ShieldCheck size={20} />
+                </div>
+                <div className="text-left">
+                  <div className="font-bold text-white">Synergy Check</div>
+                  <div className="text-xs text-slate-400">测试你作为“整合者”的契合度</div>
+                </div>
               </button>
             </div>
-            <p className="text-xs text-slate-600 mt-2 text-center flex items-center justify-center gap-1">
-              <Sparkles size={10} /> AI content may be unexpectedly philosophical or cynical.
-            </p>
-          </div>
 
-        </div>
-    </div>
+            {/* Right Panel: Interaction Area */}
+            <div
+              className="lg:col-span-2 bg-slate-900 rounded-2xl border border-white/10 flex flex-col min-h-[400px]">
+
+              {/* Output Display */}
+              <div className="flex-grow p-6 space-y-4 overflow-y-auto max-h-[500px]">
+                {response ? (
+                  <div ref={responseRef} className="animate-fade-in">
+                    <div className="flex gap-4">
+                      <div
+                        className="min-w-[40px] h-10 bg-indigo-950 rounded-full flex items-center justify-center border border-indigo-500/30">
+                        <Brain size={18} className="text-indigo-400" />
+                      </div>
+                      <div
+                        className="bg-slate-800/50 p-5 rounded-2xl rounded-tl-none border border-white/5 text-slate-200 leading-relaxed whitespace-pre-wrap shadow-inner">
+                        <span
+                          className="text-indigo-400 font-bold block mb-2 text-xs uppercase tracking-wider">
+                          {aiMode === 'chat' ? 'Strategist Response' : 'Compatibility Report'}
+                        </span>
+                        {response}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-full flex flex-col items-center justify-center text-slate-500 opacity-50">
+                    <Sparkles size={48} className="mb-4 text-indigo-500" />
+                    <p className="text-sm">
+                      {aiMode === 'chat'
+                        ? 'Waiting for your signal...'
+                        : 'Ready to analyze your profile...'}
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Input Area */}
+              <div className="p-4 border-t border-white/10 bg-slate-950/50 rounded-b-2xl">
+                <div className="relative">
+                  <textarea value={input} onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleAiQuery();
+                      }
+                    }}
+                    placeholder={
+                      aiMode === 'chat'
+                        ? "Ask me anything (Life, Business, Universe)..."
+                        : "Describe your skills, work style, and personality..."
+                    }
+                    className="w-full bg-slate-900 text-white placeholder-slate-500 border border-white/10 rounded-xl px-4 py-3 pr-12 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none h-14 min-h-[56px] overflow-hidden"
+                  />
+                  <button
+                    onClick={handleAiQuery}
+                    disabled={isLoading || !input.trim()}
+                    className="absolute right-2 top-2 p-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? <Loader size={18} className="animate-spin" /> : <Send size={18} />}
+                  </button>
+                </div>
+                <p className="text-xs text-slate-600 mt-2 text-center flex items-center justify-center gap-1">
+                  <Sparkles size={10} /> AI content may be unexpectedly philosophical or cynical.
+                </p>
+              </div>
+
+            </div>
+          </div>
         </div >
       </section >
 
-  {/* Call to Action: The Missing Piece */ }
-  < section id = "seeking" className = "py-24 px-6 max-w-4xl mx-auto text-center" >
+      {/* Call to Action: The Missing Piece */}
+      <section id="seeking" className="py-24 px-6 max-w-4xl mx-auto text-center">
         <div className="inline-block p-4 rounded-full bg-indigo-500/10 mb-8 animate-pulse">
-           <Users size={32} className="text-indigo-400" />
+          <Users size={32} className="text-indigo-400" />
         </div>
         <h2 className="text-4xl font-bold text-white mb-6">寻找我的“整合者” (Integrator)</h2>
         <p className="text-xl text-slate-400 mb-10 leading-relaxed">
-          我有宏大的愿景和破局的策略，但我需要那个能撬动世界的支点，也在寻找能一起拔刀守护日常的同伴。<br/>
-          如果你擅长落地、注重细节，并且能忍受（甚至欣赏）一个偶尔脱线的理想主义者，<br/>
+          我有宏大的愿景和破局的策略，但我需要那个能撬动世界的支点，也在寻找能一起拔刀守护日常的同伴。<br />
+          如果你擅长落地、注重细节，并且能忍受（甚至欣赏）一个偶尔脱线的理想主义者，<br />
           也许我们就是下一个“万事屋”。
         </p>
         <button className="bg-white text-slate-900 hover:bg-slate-200 px-8 py-4 rounded-full font-bold text-lg transition-all transform hover:-translate-y-1 shadow-lg shadow-indigo-500/20">
           Apply to Collaborate
         </button>
-      </section >
+      </section>
 
-  {/* Footer */ }
-  < footer className = "py-12 border-t border-white/5 text-center text-slate-500 text-sm" >
+      {/* Footer */}
+      <footer className="py-12 border-t border-white/5 text-center text-slate-500 text-sm">
         <p>© 2024 The Silver Soul Strategist. Built on Pragmatism & Passion.</p>
         <div className="flex justify-center gap-4 mt-4">
-           <Code size={16} />
-           <span>Crafted with React, Logic & Gemini</span>
+          <Code size={16} />
+          <span>Crafted with React, Logic & Gemini</span>
         </div>
-      </footer >
-    </div >
+      </footer>
+    </div>
   );
 };
 
